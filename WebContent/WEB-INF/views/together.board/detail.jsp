@@ -25,7 +25,7 @@
 
 	</div>
 	<hr />
-	<form action="${pageContext.servletContext.contextPath }/" method="post">
+	
 	<div class="pt-3">
 		<small>주소 > ${list.ADDRESS }</small>
 		<div class="d-flex justify-content-between align-items-center w-100">
@@ -38,9 +38,11 @@
 			<span class="text-gray-dark"><small>추천 > ${list.GOOD }</small></span>
 			<span class="text-gray-dark"><small>조회 > ${list.LOOKUP }</small></span>
 		</div>
-		<button type="button" class="btn btn-warning">추천</button>
+		<a href="${pageContext.servletContext.contextPath }/together/good.do?no=${list.NO }">
+		<button type="button" class="btn btn-warning" id="good">추천</button>
+		</a>
 	</div>
-	</form>
+	
 
 </div>
 <!-- 댓글 -->
@@ -83,6 +85,11 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d54ea73b1e9ac77ebe1409aa939d77e5&libraries=services"></script>
 <script>
+	$("#good").on("click",function(){
+		$("#good").prop("disabled", true);
+	});
+	
+	
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new daum.maps.LatLng(${list.LATITUDE},${list.LONGITUDE}), // 지도의 중심좌표

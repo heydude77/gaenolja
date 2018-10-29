@@ -56,7 +56,8 @@ public class TogetherBoardController {
 		}
 		System.out.println("li > "+li);
 		wreq.setAttribute("list",li, WebRequest.SCOPE_REQUEST);
-
+		
+		
 		return "main.togetherboard";
 	}//end mainboard
 
@@ -78,7 +79,7 @@ public class TogetherBoardController {
 
 		System.out.println("result > "+list);
 		wreq.setAttribute("list", list, WebRequest.SCOPE_REQUEST);
-
+		wreq.setAttribute("target", target, WebRequest.SCOPE_REQUEST);
 
 		return "main.selectboard";
 	}//end selectboard
@@ -182,12 +183,18 @@ public class TogetherBoardController {
 	
 	}//end detail
 	
-	@PostMapping("good.do")
-	public String goodPostHandle() {
+	@GetMapping("good.do")
+	public String goodPostHandle(@RequestParam Map param) {
+		System.out.println("p>"+param);
+		String no=(String)param.get("no");
+		int result=together.updatelookup(no);
+		System.out.println("result>"+result);
+		if (result==1) {
+			return "redirect:/together/detail.do?no="+no;			
+		}else {
+			return "redirect:/together/detail.do?no="+no;
+		}
 		
-		
-		
-		return "";
 	}
 	
 	

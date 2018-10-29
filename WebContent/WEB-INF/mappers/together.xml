@@ -21,7 +21,7 @@
 	</select>
 <!-- look up -->
 	<update id="updatelookup" parameterType="java.lang.String">
-		update togetherboard set lookup = lookup+1 where no=#{no}
+		update togetherboard set GOOD = GOOD+1 where no=#{no}
 	</update>
 	
 </mapper>
