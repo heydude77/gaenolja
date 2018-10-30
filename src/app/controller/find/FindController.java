@@ -24,6 +24,7 @@ import org.springframework.web.servlet.theme.SessionThemeResolver;
 import org.springframework.web.socket.WebSocketSession;
 
 import app.models.FindRepository;
+import app.models.accountRepository;
 
 @Controller
 @RequestMapping("/find")
@@ -34,23 +35,22 @@ public class FindController {
 
 	@Autowired
 	FindRepository findRepository;
+	
+	@Autowired
+	accountRepository accountRepository;
 
 	// 게시글 List 화면
 
 	@GetMapping("/list.do")
-	public String listHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String nick
-			,@RequestParam (required=false)Integer no) {
+	public String listHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String nick) {
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(today);
 
 		nick = (String)wr.getAttribute("nick", WebRequest.SCOPE_SESSION);
-		no = (Integer)wr.getAttribute("no", WebRequest.SCOPE_SESSION);
 		
 		System.out.println("nick = " + nick);
-		System.out.println("no = " + no);
 		mmap.put("nick", nick);
-		mmap.put("no", no);
 		mmap.put("date", date);
 		
 		System.out.println(mmap);
@@ -95,11 +95,12 @@ public class FindController {
 		String pictureName = "/" + time + "/" + fileName;
 		rmap.put("picture", pictureName);
 
-		System.out.println(rmap);
+		
 		
 		try {
 			int r = findRepository.addAllFind(rmap);
 			System.out.println(r);
+			mmap.put("map", rmap);
 			return "main.find.result";
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -109,10 +110,24 @@ public class FindController {
 	}
 
 	@RequestMapping("/detail.do")
-	public String detailHandler(@RequestParam int no, ModelMap map) {
-		Map data = findRepository.getByOne(no);
-		map.put("data", data);
+	public String detailHandler(@RequestParam (required=false)int no, ModelMap mmap) {	
+		
+		Map dataByNo = findRepository.getByNo(no);
+		mmap.put("data", dataByNo);
 		
 		return "main.find.detail";
+	}
+	
+	@RequestMapping("result.do")
+	public String resultHandler(ModelMap mmap, @RequestParam (required=false)int no ) {
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(today);
+		mmap.put("date", date);
+		
+		List<Map> map = findRepository.getAllFind();
+		mmap.put("map", map);
+				
+		return "main.find.result";
 	}
 }
