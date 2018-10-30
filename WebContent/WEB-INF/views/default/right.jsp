@@ -59,40 +59,17 @@
 </div>
 
 <script>
-	/* 	$("#dropdownMenuButton1").on("mouse", function(){	
-	 $("#dropdownMenuButton1").trigger("click");
-	 })
-	 */
-	/*   $.ajax({
-	      url: apiURI,
-	      dataType: "json",
-	      type: "GET",
-	      async: "false",
-	      success: function(resp) {
-	          console.log(resp);
-	          console.log("현재습도 : "+ resp.main.humidity);
-	          console.log("날씨 : "+ resp.weather[0].main );
-	          console.log("상세날씨설명 : "+ resp.weather[0].description );
-	          console.log("날씨 이미지 : "+ resp.weather[0].icon );
-	          console.log("바람   : "+ resp.wind.speed );
-	          console.log("나라   : "+ resp.sys.country );
-	          console.log("도시이름  : "+ resp.name );
-	          console.log("구름  : "+ (resp.clouds.all) +"%" );  
-	      }
-	  }) */
-	
+
 	  document.getElementById("login").onclick = function(){
 		console.log("function Strar !!");
 		var apiURI = "http://api.openweathermap.org/data/2.5/weather";
 		var param = {
-				"q":"seoul",
+				"q":"익산시",
 				"units":"metric",
 				"APPID":"221d0de36835fe0cf4b1d4b196c711bb"
 		};
 
-		$.get(apiURI, param, function(rst) {
-			 
-			console.log("ajax start !!");
+		$.get(apiURI, param, function(rst) { 
 			console.log(rst);
 			console.log("구름  : "+ (rst.clouds.all) +"%" )
 			console.log("도시:"+rst.name);
@@ -101,30 +78,11 @@
 			console.log("현재온도 : "+ rst.main.temp);
 			console.log("최저온도 : "+ rst.main.temp_min);
 			console.log("최고온도 : "+ rst.main.temp_max);
-			console.log("ajax end ..!");
 		});
 		
 		
 	};
 	 
-/* 	$("#login").on("click", function() {
-		$.ajax({   
-			"url" : "http://api.openweathermap.org/data/2.5/weather?q=seoul&units=metric&APPID=221d0de36835fe0cf4b1d4b196c711bb",
-			
-			"method" : "get" // 기본이 GET으로 요청 들어간다.
-			,
-			"async" : true
-		} // 비동기도 기본이 true
-		).done(function(rst) {
-			// onreadystatechange , 에 readyState 4 잡아서 처리했던 부분이다.
-			// 매개변수로(rst)로 받겠다고 설정한게 응답문서가 된다.
-			console.log(rst);
-			
-
-		});
-
-	});
-	   */
 
 
 </script>
