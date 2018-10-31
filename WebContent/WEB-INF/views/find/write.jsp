@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<hr class="mb-4">
 <form method="post" enctype="multipart/form-data"
 	action="${pageContext.servletContext.contextPath }/find/start.do"
 	id="formAction">
@@ -10,7 +9,8 @@
 		<h3>
 			<b>우리 강아지를 찾아주세요</b>
 		</h3>
-		<div style="text-align: right">${date }</div>
+		<br/>
+		<hr class="mb-4">
 		<br />
 	</div>
 	<div class="row">
@@ -24,51 +24,68 @@
 				class="form-control" id="dogname" name="dogname">
 		</div>
 
-		<div class="input-group col-md-12 md-3" >
-			<div class="input-group-prepend">
-				<button class="btn btn-outline-secondary" type="button"
-					id="findFileBt" name="findFileBt">파일 첨부</button>
-			</div>
+		<div class="col-md-6 mb-3">
+			<label for="lastName">연락처</label> <input type="text"
+				class="form-control" id="phone" name="phone">
+		</div>
+		<div class="col-md-6 mb-3">
+			
+				<label for="lastName">사진 첨부</label>
+			
 			<div class="custom-file ">
 				<input type="file" class="custom-file-input"
 					aria-describedby="inputGroupFileAddon03" id="picture"
 					name="picture" accept="image/*"> <label
-					class="custom-file-label" for="inputGroupFile03"> 파일이
+					class="custom-file-label" for="inputGroupFile03"> 사진이
 					필요하신가요?</label>
 			</div>
 		</div>
 	</div>
-	<br />
-	<div style="text-align: center">
-		<div class="form-group">
-			<div class="row" style="height: 250px;">
-				<div class="col">
-					<img src="" id="preview" style="height: 240px"
-						onchange="putImage(this)" class="rounded img-fluid" />
+		<br />
+		<div style="text-align: center">
+			<div class="form-group">
+				<div class="row" style="height: 250px;">
+					<div class="col-6">
+						<img src="" id="preview" style="height: 240px"
+							onchange="putImage(this)" class="rounded img-fluid" />
+					</div>
+					<div class="col">
+						<textarea class="form-control"
+							style="resize: none; height: 240px;" placeholder="특징을 적어주세요"
+							id="fcontent" name="fcontent"></textarea>
+					</div>
 				</div>
-				<div class="col">
-					<textarea class="form-control" style="resize: none; height: 240px;"
-						placeholder="특징을 적어주세요" id="fcontent" name="fcontent"></textarea>
+				<div class="row" style="height: 250px;">
+					<div class="col">
+						<textarea class="form-control" placeholder="자세한 상황, 위치 등을 적어주세요"
+							style="resize: none; height: 245px;" id="scontent"
+							name="scontent"></textarea>
+					</div>
 				</div>
-			</div>
-			<div class="row" style="height: 250px;">
-				<div class="col">
-					<textarea class="form-control" placeholder="자세한 상황, 위치 등을 적어주세요"
-						style="resize: none; height: 245px;" id="scontent" name="scontent"></textarea>
-				</div>
-			</div>
-			<div id="map" style="width: 100%; height: 350px;"></div>
-			<p style="text-align: center">
-				<b><em>지도를 확대해서 위치를 클릭해주세요</em></b>
-			</p>
-			<div id="clickLatlng"></div>
+				<div id="map" style="width: 100%; height: 350px;"></div>
+				<p style="text-align: center">
+					<b><em>지도를 확대해서 위치를 클릭해주세요</em></b>
+				</p>
+				<div id="clickLatlng"></div>
+				
+				<input type="hidden" name="mapx" value="" id="mapx"/>
+				<input type="hidden" name="mapy" value="" id="mapy"/>
 
-			<div style="text-align: center">
-				<button class="btn btn-outline-secondary" type="button"
-					onclick="writeOn();">작성 완료</button>
+				<div>
+					<button type="button" class="btn btn-outline-primary"
+						onclick="writeOn();">작성 완료</button>
+					<div style="text-align: right">
+						<a href="${pageContext.servletContext.contextPath }/find/list.do">
+							<button type="button" class="btn btn-outline-secondary btn-sm">뒤로가기
+							</button>
+						</a> <a href="${pageContext.servletContext.contextPath }/index.do">
+							<button type="button" class="btn btn-outline-secondary btn-sm">메인으로
+							</button>
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
 </form>
 
 <script>
@@ -98,7 +115,7 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5194c970c18885a8e81f75b8cefdd048&libraries=services,clusterer,drawing"></script>
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
 	mapOption = {
 		center : new daum.maps.LatLng(37.566842, 126.978629), // 지도의 중심좌표
 		level : 3
@@ -130,5 +147,8 @@
 
 		var resultDiv = document.getElementById('clickLatlng');
 		resultDiv.innerHTML = message;
+		
+		document.getElementById('mapx').value = latlng.getLat();
+		document.getElementById('mapy').value = latlng.getLng();
 	});
 </script>
