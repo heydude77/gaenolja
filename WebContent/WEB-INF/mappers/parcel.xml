@@ -9,7 +9,7 @@
 
 <!-- 게시글 전부 뽑는거 -->
 	<select id="getAllByParcel" resultType="java.util.HashMap" >
-		select * from parcel order by regdate desc
+		select * from parcel
 	</select>
 	
 <!-- 특정 게시글 데이터 뽑는거 -->

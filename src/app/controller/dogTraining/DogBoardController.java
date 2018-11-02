@@ -33,15 +33,20 @@ public class DogBoardController {
 				
 	
 		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/gaekipedia/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/gaekipedia/main.jsp");
-		
+		mav.setViewName("dogBoard.main");
+		mav.addObject("center", "/WEB-INF/views/dogBoard/dogBoard.jsp");
 		return mav;
+		
 	
 	}
-
+	
+	@GetMapping("/myDog/write.do")
+	public ModelAndView myDogWriteHandle() {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("dogBoard.main");
+			mav.addObject("center", "/WEB-INF/views/dogBoard/myDogWrite.jsp");
+			return mav;
+	}
 	
 	
 	@GetMapping("/myDog.do")
@@ -53,7 +58,7 @@ public class DogBoardController {
 	
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("dogBoard.main");
-		mav.addObject("center", "/WEB-INF/views/dogTraining/gajalang.jsp");
+		mav.addObject("center", "/WEB-INF/views/dogBoard/myDog.jsp");
 		return mav;
 	} 
 	

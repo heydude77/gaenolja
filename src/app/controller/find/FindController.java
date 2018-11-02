@@ -3,6 +3,7 @@ package app.controller.find;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.theme.SessionThemeResolver;
+import org.springframework.web.socket.WebSocketSession;
 
 import app.models.FindRepository;
 
@@ -36,65 +38,47 @@ public class FindController {
 	// 게시글 List 화면
 
 	@GetMapping("/list.do")
-
-	public ModelAndView listNeoHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String p) {
-	
+	public String listHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String nick
+			,@RequestParam (required=false)Integer no) {
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(today);
+
+		nick = (String)wr.getAttribute("nick", WebRequest.SCOPE_SESSION);
+		no = (Integer)wr.getAttribute("no", WebRequest.SCOPE_SESSION);
+		
+		System.out.println("nick = " + nick);
+		System.out.println("no = " + no);
+		mmap.put("nick", nick);
+		mmap.put("no", no);
 		mmap.put("date", date);
 		
-	
+		System.out.println(mmap);
+
 		//-------------------------------------
-		Map map = new HashMap();
-		int pp = (p == null) ? 1 : Integer.parseInt(p);
-		
-		map.put("s", 1 + (pp-1) * 6);
-		map.put("e", pp*6);
-		
-		List<Map> every = findRepository.getSomeFind(map);
+
+		List<Map> every = findRepository.getAllFind();
+		System.out.println(every);
 		mmap.put("every",every);
 		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/find/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/find/list.jsp");
-		
-		return mav;
+		return "main.find.list";
 	}
 
-	
-	
-	// 이 밑으로 손 안댔음
-
 	@GetMapping("/write.do")
-	public ModelAndView writeHandler() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/find/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/find/write.jsp");
+	public String writeHandler() {
 		
-		return mav;
+		return "main.find.write";
 	}
 	
 	// 게시글 write 화면
 	@PostMapping("/start.do")
-	public ModelAndView startHandler(@RequestParam Map rmap, @RequestParam MultipartFile picture,
+	public String startHandler(@RequestParam Map rmap, @RequestParam MultipartFile picture,
 		ModelMap mmap, WebRequest wr) throws IOException {
-		
-		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
-		
-		String nick =  (String) userInfo.get("NICKNAME");
-		
-		System.out.println("rmap = "+rmap);
+	
+		System.out.println(rmap);
 		System.out.println(picture);
-
-//		System.out.println("mapx: + " + mapx);
-		rmap.put("nick",nick);
-		
-		// 파일 첨부
 		long time = System.currentTimeMillis();
+		// 파일 첨부
 		String fileName = String.valueOf(time) + "_" + picture.getOriginalFilename();
 		System.out.println(fileName);
 		String path = ctx.getRealPath(String.valueOf(time));
@@ -110,71 +94,25 @@ public class FindController {
 		
 		String pictureName = "/" + time + "/" + fileName;
 		rmap.put("picture", pictureName);
-		rmap.put("id", "까치");
 
+		System.out.println(rmap);
+		
 		try {
 			int r = findRepository.addAllFind(rmap);
 			System.out.println(r);
-			mmap.put("map", rmap);
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/find/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/find/result.jsp");
-			
-			return mav;
+			return "main.find.result";
 		}catch(Exception e) {
 			e.printStackTrace();
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/find/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/find/write.jsp");
-			
-			return mav;
+			return "main.find.write";
 		}
 
 	}
 
 	@RequestMapping("/detail.do")
-	public ModelAndView detailHandler(@RequestParam (required=false)int no, ModelMap mmap) {	
+	public String detailHandler(@RequestParam int no, ModelMap map) {
+		Map data = findRepository.getByOne(no);
+		map.put("data", data);
 		
-		Map data = findRepository.getByNo(no);
-		mmap.put("data", data);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/find/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/find/detail.jsp");
-		
-		return mav;
-	}
-	
-	@RequestMapping("/result.do")
-	public ModelAndView resultHandler(ModelMap mmap, @RequestParam (required=false)int no ) {
-		Date today = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String date = sdf.format(today);
-		mmap.put("date", date);
-		
-		List<Map> map = findRepository.getAllFind();
-		mmap.put("map", map);
-				
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/find/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/find/result.jsp");
-		
-		return mav;
-	}
-	
-	@RequestMapping("/remove.do")
-	public String removeHandler(int no) {
-		
-		int i = findRepository.removeByNo(no);
-		System.out.println(i);
-		if(i == 1) {
-			return "redirect:/find/list.do";
-		}else {
-			return "main.find.detail";
-		}
+		return "main.find.detail";
 	}
 }

@@ -16,14 +16,14 @@
           <a class="p-2 text-muted" id="dropdownMenuButton" data-toggle="dropdown" href="#">똥개훈련</a>
 	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/dogTraining/training.do">개동</a>
-			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/dogTraining/gaejalang.do">개자랑</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/board/myDog.do">개자랑</a>
 			    </div>
 		  </div>
        	 <div class="dropdown p-2 text-muted">
        	   <a class="p-2 text-muted" id="dropdownMenuButton" data-toggle="dropdown" href="#">개아파</a>
 	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/help/list.do">도와주시개</a>
-			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/doghospital.do">개병원ㅜ</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/board/main.do">도와주시개</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/board/myDog.do">개병원ㅜ</a>
 			    </div>
 		  </div>
 		  
