@@ -7,10 +7,10 @@
 <table class="table table-hover">
   		<thead>
 	     <tr>
-    	  <th style="text-align: center;"><small>NO</small></th>
-     	  <th style="text-align: center;"><small>개이름</small></th>
-    	  <th style="text-align: center;"><small>제목</small></th>
-    	  <th style="text-align: center;"><small>작성자</small></th>
+    	  <th style="text-align: center;">NO</th>
+     	  <th style="text-align: center;">개이름</th>
+    	  <th style="text-align: center;">제목</th>
+    	  <th style="text-align: center;">작성자</th>
 	     </tr>
   		</thead>
   		<tbody>
@@ -28,9 +28,9 @@
 <table class="table table-hover">
   		<thead>
 	     <tr>
-     	  <th style="text-align: center;"><small>분양유무</small></th>
-    	  <th style="text-align: center;"><small>제목</small></th>
-     	  <th style="text-align: center;"><small>날짜</small></th>
+     	  <th style="text-align: center;">분양유무</th>
+    	  <th style="text-align: center;">제목</th>
+     	  <th style="text-align: center;">날짜</th>
 	     </tr>
   		</thead>
   		<tbody>
@@ -54,13 +54,13 @@
 <table class="table table-hover">
   		<thead>
 	     <tr>
-    	  <th style="width:50px; text-align: center;"><small>NO</small></th>
-    	  <th style="width:80px; text-align: center;"><small>지역구</small></th>
-    	  <th style="width:150px; text-align: center;"><small>제목</small></th>
-    	  <th style="width:80px; text-align: center;"><small>작성자</small></th>
-     	  <th style="width:80px; text-align: center;"><small>날짜</small></th>
-     	  <th style="width:50px; text-align: center;"><small>좋아요</small></th>
-     	  <th style="width:50px; text-align: center;"><small>조회수</small></th>
+    	  <th style="width:50px; text-align: center;">NO</th>
+    	  <th style="width:80px; text-align: center;">지역구</th>
+    	  <th style="width:150px; text-align: center;">제목</th>
+    	  <th style="width:80px; text-align: center;">작성자</th>
+     	  <th style="width:80px; text-align: center;">날짜</th>
+     	  <th style="width:50px; text-align: center;">좋아요</th>
+     	  <th style="width:50px; text-align: center;">조회수</th>
 	     </tr>
   		</thead>
   		<tbody>

@@ -125,7 +125,6 @@
 			
 </header>
 
-<body>
    
 
 
@@ -175,7 +174,7 @@
 			html += "<hr/>";
 			html += "</div>";
 		}//end for
-		document.getElementById("connectlist").innerHTML = html;
+	//	document.getElementById("connectlist").innerHTML = html;
 	};
 
 	var openchat = function(target) {

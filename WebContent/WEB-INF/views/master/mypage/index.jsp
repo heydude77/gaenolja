@@ -5,7 +5,7 @@
 	<img alt="이미지 안나오면 엑박" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE }" style="width: 500px; height: 500px;">
 </div>
 
-<div style="float: left; width: 580px;">
+<div style="float: right; width: 580px;">
 	<table class="table" >
 		<thead>
 			<tr>

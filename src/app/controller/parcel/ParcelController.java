@@ -125,11 +125,9 @@ public class ParcelController {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		Map onedata = parcelRepository.getByOneParcel(no);
 		List comlist = parcelRepository.getAllByComments(no);
-		List cmtcnt = parcelRepository.getByCmtCount(no);
 			one.put("userInfo", userInfo);
 			one.put("one", onedata);
 			one.put("comlist", comlist);
-			one.put("cmtcnt", cmtcnt);
 			
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");

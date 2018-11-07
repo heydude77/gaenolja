@@ -77,6 +77,21 @@
 <!------------------------------------------------------- 게시판 댓글 내용 전체 출력 뷰 시작 -->
 
 <label style="margin: 20px;">#댓글을 클릭하시면 리플을 입력하실수 있습니다.</label>
+<ul class="list-unstyled"> 
+	<c:forEach var="c" items="${comlist }" varStatus="vs">
+		<li class="media border-top-0" id="view-listcomment_${vs.count }" data-toggle="collapse" data-target="#collapseExample_${vs.count }" aria-expanded="false" aria-controls="collapseExample" >
+			<img class="rounded-circle" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" alt="프로필 이미지" style="width: 50px; height: 50px; margin-right: 20px;">
+			<div class="media-body">
+				<h5 class="mt-0 mb-1" style="font-size: 15px;">${c.NICK}<small>(${c.TALKER })</small></h5>
+				<div style="font-size: 13px;">${c.COMMENTS }</div>
+			</div>
+		</li>
+		<hr style="margin: 10px;"/>
+	</c:forEach>
+	<div id="view_comment"></div>
+</ul>
+
+<%-- 
 	<ul class="list-unstyled">
 		<c:forEach var="c" items="${comlist }" varStatus="vs">
 			<li class="media border-top-0" id="view-listcomment_${vs.count }" data-toggle="collapse" data-target="#collapseExample_${vs.count }" aria-expanded="false" aria-controls="collapseExample" onclick="getReComment(this, '${c.SERIAL }')">
@@ -90,13 +105,14 @@
 			<li class="collapse" id="collapseExample_${vs.count }">
 				<div class="input-group" style="margin-top: 10px;">
 					<span class="input-group-text" id="basic-addon1">${userInfo.NICKNAME }</span>
-					<input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" onchange="addReComment(this);" >
+					<input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" id="reCmt" onchange="addReComment(this, '${c.SERIAL }')">
 				</div>
 			</li>
 			<hr style="margin: 10px;"/>
 		</c:forEach>
 		<div id="view_comment"></div>
 	</ul>
+--%>
 	
 <!------------------------------------------------------- 게시판 댓글 내용 전체 출력 뷰 끝 -->
 
@@ -152,17 +168,6 @@
 	
 //=============================================================================================================
 	
-	var getReComment = function(target, serial) {
-		var code = serial;
-		var param = {"code" : code};
-		console.log(param);
-		$.post("${pageContext.servletContext.contextPath }/getrecomment.do", param, function(rst) {
-			var obj = JSON.parse(rst);
-			console.log(rst);
-			console.log(obj);
-		});
-	};
-	
 // 댓글 저장
 	$("#new_comment").on("change", function() {
 		var comment = $("#new_comment").val();
@@ -184,33 +189,49 @@
 		$("#view_comment").append(html);
 		document.getElementById("new_comment").value = "";
 		
-		var param = {"ino":${one.NO},"talker":"${userInfo.ID}","comments":comment,"nick":"${userInfo.NICKNAME}"};
+		var param = {"ino":"${one.NO}","talker":"${userInfo.ID}","comments":comment,"nick":"${userInfo.NICKNAME}"};
 		console.log(param);
 		$.post("${pageContext.servletContext.contextPath }/addcomment.do", param, function(rst) {
 
 		});
 	});
-	
-	
-// 리플 저장
-	var addReComment = function(t, serial) {
-		console.log($(target).val() + "/ " +serial);
+/* 	
+	// 리리플 출력
+	var getReComment = function(target, serial) {
 		var code = serial;
-		var recomments = this.value;
+		var param = {"code" : code};
+		console.log(param);
+		$.post("${pageContext.servletContext.contextPath }/getrecomment.do", param, function(rst) {
+			console.log(rst);
+			
+		});
+			var html = "<div class=\"media mt-3\">";
+				html += "<img class=\"rounded-circle\" src=\"${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}\" alt=\"프로필 이미지\" style=\"width: 50px; height: 50px; margin-right: 20px;\">";
+				html += "<div class=\"media-body\">";
+				html += "<h5 class=\"mt-0\">"+ rst.NICK + "(" + rst.RETALKER + ")" + "</h5>";
+			    html += rst.RECOMMENT
+			    html += "</div>";
+				html += "</div>";
+					
+			document.getElementById("view-recomment").innerHTML = html;
+	};
 		
-		var html = "<hr class=\"mb-4\">";
-			html += "<div class=\"media mt-3\">";
+// 리리플 저장
+	var addReComment = function(t, serial) {
+//		console.log($(target).val() + "/ " +serial);
+		var code = serial;
+		var recomments = t.value;
+		
+		var html = "<div class=\"media mt-3\">";
 			html += "<img class=\"rounded-circle\" src=\"${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}\" alt=\"프로필 이미지\" style=\"width: 50px; height: 50px; margin-right: 20px;\">";
 			html += "<div class=\"media-body\">";
-			html += "<div class=\"alert alert-secondary\" role=\"alert\">";
 			html += "<h5 class=\"mt-0\">${userInfo.NICKNAME }(${userInfo.ID })</h5>";
 		    html += recomments
 		    html += "</div>";
 			html += "</div>";
-			html += "</div>";
 		
-		$("#view_recomment").append(html);
-		document.getElementById(code).value = "";
+		document.getElementById("view-recomment").innerHTML = html;
+		document.getElementById("reCmt").value = "";
 		
 		var param = {"code":code,"retalker":"${userInfo.ID}","recomments":recomments,"nick":"${userInfo.NICKNAME}"};
 		console.log(param);
@@ -219,9 +240,6 @@
 			
 		});	
 	};
-	
-
-	
-
+	 */
 
 </script>
