@@ -3,15 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<h2>데려가시개(분양)</h2>
-<table class="table table-hover">
+<h2 style="margin-left: 100px; margin-top: 20px;">데려가시개(분양)</h2>
+<table class="table table-hover" style="width: 900px; margin: auto;">
   		<thead>
 	     <tr>
-     	  <th style="text-align: center;">분양유무</th>
-    	  <th style="text-align: center;">댓글 내용</th>
-    	  <th style="text-align: center;">제목</th>
-    	  <th style="text-align: center;">작성자</th>
-     	  <th style="text-align: center;">댓글작성 날짜</th>
+			<th style="text-align: center;"><small>분양유무</small></th>
+			<th style="text-align: center;"><small>댓글</small></th>
+			<th style="text-align: center;"><small>제목</small></th>
+			<th style="text-align: center;"><small>작성자</small></th>
+ 	  		<th style="text-align: center;"><small>댓글작성 날짜</small></th>
 	     </tr>
   		</thead>
   		<tbody>
@@ -19,39 +19,39 @@
 	     		<tr>
 					<c:choose>
 						<c:when test="${p.CHOICE == 1 }">
-							<td style="text-align: center;">[분양중]</td>
+							<td style="text-align: center;"><small>[분양중]</small></td>
 						</c:when>
 						<c:otherwise>
-							<td style="text-align: center;">[분양완료]</td>
+							<td style="text-align: center;"><small>[분양완료]</small></td>
 						</c:otherwise>
 					</c:choose>
-					<td style="text-align: center;">${p.COMMENTS }</td>
-	     			<td style="text-align: center;"><a href="${pageContext.servletContext.contextPath }/detail.do?no=${p.NO }">${p.TITLE }</a></td>
-					<td style="text-align: center;">${p.TALKER }</td>
-	     			<td style="text-align: center;"><fmt:formatDate value="${p.REGDAY }" /></small></td>
+						<td style="text-align: center;"><small>${p.COMMENTS }</small></td>
+		     			<td style="text-align: center;"><small><a href="${pageContext.servletContext.contextPath }/detail.do?no=${p.NO }">${p.TITLE }</a></small></td>
+						<td style="text-align: center;"><small>${p.TALKER }</small></td>
+		     			<td style="text-align: center;"><small><fmt:formatDate value="${p.REGDAY }" /></small></td>
 	     		</tr>
 	     	</c:forEach>
 		</tbody>
 </table>
-<h2>같이가시개</h2>
-<table class="table table-hover">
+<h2 style="margin-left: 100px; margin-top: 20px;">같이가시개</h2>
+<table class="table table-hover" style="width: 900px; margin: auto;">
   		<thead>
 	     <tr>
-    	  <th style="width:80px; text-align: center;">지역구</th>
-    	  <th style="width:50px; text-align: center;">댓글내용</th>
-    	  <th style="width:150px; text-align: center;">제목</th>
-    	  <th style="width:80px; text-align: center;">작성자</th>
-     	  <th style="width:80px; text-align: center;">댓글작성 날짜</th>
+	    	  <th style="width:80px; text-align: center;"><small>지역구</small></th>
+	    	  <th style="width:50px; text-align: center;"><small>댓글내용</small></th>
+	    	  <th style="width:150px; text-align: center;"><small>제목</small></th>
+	    	  <th style="width:80px; text-align: center;"><small>작성자</small></th>
+	     	  <th style="width:80px; text-align: center;"><small>댓글작성 날짜</small></th>
 	     </tr>
   		</thead>
   		<tbody>
   			<c:forEach var="tc" items="${tocmt }">
      		<tr>
-				<td style="text-align: center;">${tc.AREA }</td>
-				<td style="text-align: center;">${tc.CONTENT }</td>
-     			<td style="text-align: center;"><a href="${pageContext.servletContext.contextPath }/together/detail.do?no=${tc.NO }">${tc.TITLE }</a></td>
-     			<td style="text-align: center;">${tc.NICK_1 }</td>
-				<td style="text-align: center;"><fmt:formatDate value="${tc.LEFTDATE }" /></td>
+				<td style="text-align: center;"><small>${tc.AREA }</small></td>
+				<td style="text-align: center;"><small>${tc.MENT }</small></td>
+     			<td style="text-align: center;"><small><a href="${pageContext.servletContext.contextPath }/together/detail.do?no=${tc.NO }">${tc.TITLE }</a></small></td>
+     			<td style="text-align: center;"><small>${tc.COMMNETER }</small></td>
+				<td style="text-align: center;"><small><fmt:formatDate value="${tc.LEFTDATE }" /></small></td>
      		</tr>
      		</c:forEach>
 	  </tbody>

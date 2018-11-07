@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<h2>찾아주시개</h2>
-<table class="table table-hover">
+<h2 style="margin-left: 100px; margin-top: 20px;">찾아주시개</h2>
+<table class="table table-hover" style="width: 900px; margin: auto;">
   		<thead>
 	     <tr>
     	  <th style="text-align: center;">NO</th>
@@ -24,8 +24,8 @@
      		</c:forEach>
 	  </tbody>
 </table>
-<h2>데려가시개(분양)</h2>
-<table class="table table-hover">
+<h2 style="margin-left: 100px; margin-top: 20px;">데려가시개(분양)</h2>
+<table class="table table-hover" style="width: 900px; margin: auto;">
   		<thead>
 	     <tr>
      	  <th style="text-align: center;">분양유무</th>
@@ -50,8 +50,8 @@
 	     	</c:forEach>
 		</tbody>
 </table>
-<h2>같이가시개</h2>
-<table class="table table-hover">
+<h2 style="margin-left: 100px; margin-top: 20px;">같이가시개</h2>
+<table class="table table-hover" style="width: 900px; margin: auto;">
   		<thead>
 	     <tr>
     	  <th style="width:50px; text-align: center;">NO</th>

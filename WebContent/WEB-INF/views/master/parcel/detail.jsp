@@ -3,12 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<div style="width: 900px; margin: auto;">
 <!------------------------------------------------------- 분양 강아지 정보 보이는 뷰 시작 이미지 / 정보만 보임 -->
-<div style="float: left; margin-right: 20px;">
-		<img alt="이미지 안나오면 엑박" src="${pageContext.servletContext.contextPath }${one.MAINIMAGE }" style="width: 500px; height: 500px;">
-</div>
+
 <div style="float: right; width: 580px;">
+		<img alt="이미지 안나오면 엑박" src="${pageContext.servletContext.contextPath }${one.MAINIMAGE }" style="width: 400px; height: 400px;">
+</div>
+<div style="float: right; width: 480px;">
 	<table class="table">
 		<thead>
 			<tr>
@@ -80,7 +81,7 @@
 <ul class="list-unstyled"> 
 	<c:forEach var="c" items="${comlist }" varStatus="vs">
 		<li class="media border-top-0" id="view-listcomment_${vs.count }" data-toggle="collapse" data-target="#collapseExample_${vs.count }" aria-expanded="false" aria-controls="collapseExample" >
-			<img class="rounded-circle" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" alt="프로필 이미지" style="width: 50px; height: 50px; margin-right: 20px;">
+			<img class="rounded-circle" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" alt="image" style="width: 50px; height: 50px; margin-right: 20px;">
 			<div class="media-body">
 				<h5 class="mt-0 mb-1" style="font-size: 15px;">${c.NICK}<small>(${c.TALKER })</small></h5>
 				<div style="font-size: 13px;">${c.COMMENTS }</div>
@@ -119,7 +120,7 @@
 <!------------------------------------------------------- 댓글 입력할수 있는 폼 뷰 시작 -->
 <label style="color: blue;">${userInfo.NICKNAME }(${userInfo.ID })</label>
 <div class="input-group mb-3" id="input-comment">
-<img class="rounded-circle" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" alt="프로필 이미지" style="width: 50px; height: 50px; margin-right: 20px;">
+<img class="rounded-circle" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" alt="image" style="width: 50px; height: 50px; margin-right: 20px;">
 	<input type="text" class="form-control" id="new_comment" aria-describedby="button-addon2" style="height: 50px;">
 	<div class="input-group-append">
 		<button class="btn btn-outline-secondary" type="button" id="btn_comment">New Comment</button>
@@ -137,6 +138,7 @@
 			<a href="${pageContext.servletContext.contextPath }/parcel.do"><button type="button" class="btn btn-secondary btn-lg btn-block">Back</button></a>
 		</c:otherwise>
 	</c:choose>
+</div>
 </div>
 
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->

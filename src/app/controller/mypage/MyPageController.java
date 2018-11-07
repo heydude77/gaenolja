@@ -57,6 +57,7 @@ public class MyPageController {
 		String nick = (String)userInfo.get("NICKNAME");
 		List pacmt = myPageRepository.getByParcelComments(talker);
 		List tocmt = myPageRepository.getByTogetherComment(nick);
+		System.out.println(tocmt);
 			map.put("tocmt", tocmt);
 			map.put("pacmt", pacmt);
 		
