@@ -46,6 +46,8 @@ public class ParcelController {
 		Map data = new HashMap();
 			data.put("s", 1 + (pp-1) * 6);
 			data.put("e", pp*6);
+			
+			map.put("current",pp);
 		
 		List<Map> every = parcelRepository.getSomeParcel(data);
 			map.put("every",every);
@@ -53,7 +55,7 @@ public class ParcelController {
 		int tot = parcelRepository.getTotalCountByParcel();
 		map.put("size", tot/6 + (tot%6>0 ? 1: 0));
 		//----------------------------------------------------------------
-		System.out.println(map);
+		
 		ModelAndView mav = new ModelAndView();
 		
 			mav.setViewName("master");
@@ -191,10 +193,10 @@ public class ParcelController {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-				map.put("err", "on");
+				map.put("upDetailErr", "on");
 				mav.setViewName("master");
 				mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
-				mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
+				mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");
 			
 			return mav;
 		}

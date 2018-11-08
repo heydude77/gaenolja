@@ -7,6 +7,17 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <hr class="mb-4">
 <h4 class="mb-3" align="center">분양 글쓰기</h4>
+<c:if test="${!empty err }">
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>등록 실패!</strong> 입력하지 않은 필수항목이 존재 합니다. 확인 하시고 다시 입력 부탁 드립니다.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</c:if>
+<c:if test="${!empty upDetailErr }">
+	<script>window.alert("수정실패!\리스트에서 수정하실 게시물을 다시 선택해 주세요.")</script>
+</c:if>
 
 <form action="${pageContext.servletContext.contextPath }/add.do" method="post" enctype="multipart/form-data" style="width: 900px; margin: auto;">
 	<input type="hidden" name="lat" value="" id="lat"/>

@@ -34,6 +34,8 @@ public class DogHospitalController {
 		Map data = new HashMap();
 			data.put("s", 1 + (pp-1) * 20);
 			data.put("e", pp*20);
+			
+			map.put("current",pp);
 		
 		List<Map> every = dhr.getSomeHospital(data);
 			map.put("every",every);
