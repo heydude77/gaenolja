@@ -1,10 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!DOCTYPE html>
 
-<form action="${pageContext.servletContext.contextPath}/change_info.do" method="post" enctype="multipart/form-data">
+<hr class="mb-4">
+<h4 class="mb-3" align="center">회원정보수정</h4>
+<c:if test="${!empty err }">
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>등록 실패!</strong> 입력하지 않은 필수항목이 존재 합니다. 확인 하시고 다시 입력 부탁 드립니다.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</c:if>
+
+<form action="${pageContext.servletContext.contextPath}/change_info.do" method="post" enctype="multipart/form-data" style="align-items: center;">
 <div class="container">
 	<div class="row  justify-content-center">	
 		<div class="col-md-8 offset-md-2">
