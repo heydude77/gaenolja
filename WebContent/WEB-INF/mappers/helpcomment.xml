@@ -16,6 +16,11 @@
 	<select id="getAllComment" resultType="java.util.HashMap">
 		select * from helpcomment
 	</select>
+	
+	<!-- 특정 아이디의 댓글 전체 뽑는거 -->
+	<select id="getByHelpCmt" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from help join (select * from helpcomment where nick = #{nick} order by regdate desc)c on help.no = c.hno
+	</select>
 
 	
 </mapper> 

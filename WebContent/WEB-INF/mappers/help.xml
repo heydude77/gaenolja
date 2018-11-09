@@ -31,4 +31,9 @@
 		update help set look = look+1 where no=#{no}
 	</update>
 	
+	<!-- 특정 아이디의 게시글 전체 뽑는거 -->
+	<select id="getByHelpList" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from help where nick = #{nick} order by regdate
+	</select>
+	
 </mapper>

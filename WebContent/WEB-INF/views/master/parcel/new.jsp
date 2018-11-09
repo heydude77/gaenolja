@@ -127,8 +127,8 @@
 			$(".msg").html("유효한 입력정보 입니다.");
 			$(".msg").css("color", "green");
 		}else {
-			$(".form-control").html();
-			$(".msg").html("유효하지 않은 입력정보 입니다.");
+			$(".form-control").val("");
+			$(".msg").html("유효하지 않은 입력정보 입니다. 확인 하시고 다시 입력해 주시기 바랍니다.");
 			$(".msg").css("color", "red");
 		}
 	}

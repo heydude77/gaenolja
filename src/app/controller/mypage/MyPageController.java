@@ -38,9 +38,13 @@ public class MyPageController {
 		List parcelList = myPageRepository.getByParcelList(writer);
 		List findList = myPageRepository.getByFindList(nick);
 		List togetherList = myPageRepository.getByTogetherList(nick);
+		List dtList = myPageRepository.getByDogTrainingList(id);
+		List helpList = myPageRepository.getByHelpList(nick);
 			map.put("parcelList", parcelList);
 			map.put("findList", findList);
 			map.put("togetherList", togetherList);
+			map.put("dtList", dtList);
+			map.put("helpList", helpList);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
@@ -57,9 +61,12 @@ public class MyPageController {
 		String nick = (String)userInfo.get("NICKNAME");
 		List pacmt = myPageRepository.getByParcelComments(talker);
 		List tocmt = myPageRepository.getByTogetherComment(nick);
-		System.out.println(tocmt);
+		List dtcmt = myPageRepository.getByDogTrainingCmt(talker);
+		List hlcmt = myPageRepository.getByHelpCmt(nick);
 			map.put("tocmt", tocmt);
 			map.put("pacmt", pacmt);
+			map.put("dtcmt", dtcmt);
+			map.put("hlcmt", hlcmt);
 		
 		ModelAndView mav = new ModelAndView();
 		

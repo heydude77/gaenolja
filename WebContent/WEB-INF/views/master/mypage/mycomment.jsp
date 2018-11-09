@@ -56,3 +56,49 @@
      		</c:forEach>
 	  </tbody>
 </table>
+<h2 style="margin-left: 100px; margin-top: 20px;">개동</h2>
+<table class="table table-hover" style="width: 900px; margin: auto;">
+  		<thead>
+	     <tr>
+    	  <th style="width:80px; text-align: center;"><small>NO</small></th>
+    	  <th style="width:50px; text-align: center;"><small>댓글내용</small></th>
+    	  <th style="width:150px; text-align: center;"><small>게시글 제목</small></th>
+    	  <th style="width:80px; text-align: center;"><small>작성자</small></th>
+     	  <th style="width:80px; text-align: center;"><small>댓글작성 날짜</small></th>
+	     </tr>
+  		</thead>
+  		<tbody>
+  			<c:forEach var="dc" items="${dtcmt }">
+     		<tr>
+				<td style="text-align: center;"><small>${dc.NUM }</small></td>
+				<td style="text-align: center;"><small>${dc.MSG }</small></td>
+     			<td style="text-align: center;"><small><a href="${pageContext.servletContext.contextPath }/dogTraining/detail.do?no=${dc.NO }">${dc.TITLE }</a></small></td>
+     			<td style="text-align: center;"><small>${dc.ID }</small></td>
+				<td style="text-align: center;"><small>${dc.CDATE }"</td>
+     		</tr>
+     		</c:forEach>
+	  </tbody>
+</table>
+<h2 style="margin-left: 100px; margin-top: 20px;">도와주시개</h2>
+<table class="table table-hover" style="width: 900px; margin: auto;">
+  		<thead>
+	     <tr>
+    	  <th style="width:80px; text-align: center;"><small>NO</small></th>
+    	  <th style="width:50px; text-align: center;"><small>댓글내용</small></th>
+    	  <th style="width:150px; text-align: center;"><small>게시글 제목</small></th>
+    	  <th style="width:80px; text-align: center;"><small>작성자</small></th>
+     	  <th style="width:80px; text-align: center;"><small>댓글작성 날짜</small></th>
+	     </tr>
+  		</thead>
+  		<tbody>
+  			<c:forEach var="hc" items="${hlcmt }">
+     		<tr>
+				<td style="text-align: center;"><small>${hc.HNO }</small></td>
+				<td style="text-align: center;"><small>${hc.REPLY }</small></td>
+     			<td style="text-align: center;"><small><a href="${pageContext.servletContext.contextPath }/help/detail.do?no=${hc.NO }">${hc.TITLE }</a></small></td>
+     			<td style="text-align: center;"><small>${hc.NICK }</small></td>
+				<td style="text-align: center;"><small><fmt:formatDate value="${hc.REGDATE }" /></small></td>
+     		</tr>
+     		</c:forEach>
+	  </tbody>
+</table>

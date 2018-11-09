@@ -31,5 +31,10 @@
 		parameterType="java.util.HashMap">
 		select * from (select rownum r, o.* from (select * from dogtraining order by no desc) o ) where r between #{s} and #{e}
 	</select>
+	
+	<!-- 특정 아이디의 게시글 전체 뽑는거 -->
+	<select id="getByDogTrainingList" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from dogtraining where dtid = #{id} order by day
+	</select>
 
 </mapper>

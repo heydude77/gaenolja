@@ -56,4 +56,26 @@ public class MyPageRepository {
 	public List<Map> getByMyDogTalk(String talker) {
 		return template.selectList("dogTalk.getByMyDogTalk", talker);
 	}
+	
+	// 개동게시판 아이디 별로 가져오기
+	public List<Map> getByDogTrainingList(String id) {
+		return template.selectList("dogtraining.getByDogTrainingList", id);
+	}
+	
+	// 개동게시판 아이디별 댓글 가져오기
+	public List<Map> getByDogTrainingCmt(String talker) {
+		return template.selectList("DCOMMENT.getByDogTrainingCmt", talker);
+	}
+	
+	// 도와주시개 게시판 아이디 별로 가져오기
+	public List<Map> getByHelpList(String nick) {
+		return template.selectList("help.getByHelpList", nick);
+	}
+	
+	// 도와주시개 게시판 아이디별 댓글 가져오기
+	public List<Map> getByHelpCmt(String nick) {
+		return template.selectList("helpcomment.getByHelpCmt", nick);
+	}
+	
+	
 }
