@@ -49,13 +49,14 @@
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양자 핸드폰 번호</label>
-			<input type="text" class="form-control" id="phone" name="phone" >
+			<input type="text" class="form-control" id="phone" name="phone" onchange="checkPhone(this);" >
+			<span class="msg"></span>
 		</div>
 		<div class="col-md-6 mb-3">
 
 			<label for="lastName">분양장소(상세주소입력)</label>			
 			<!-- ======================================================= -->
-			<button type="button" onclick="addressPopUp()" >간편 주소 입력</button>
+			<button type="button" onclick="addressPopUp()" class="btn-sm btn-outline-info" >간편 주소 입력</button>
 					<input type="text" class="form-control" id="area" placeholder="간편 주소" readonly="readonly" onchange="address(this);" name="area" >					
 			<!-- ======================================================= -->
 
@@ -118,6 +119,19 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8732ddf8bab883cf85aa0180da9e413d&libraries=services,clusterer,drawing"></script>
 <script>
+	var checkPhone = function(target) {
+		var val = target.value;
+		console.log(val);
+		var check = /^\d{3}-\d{3,4}-\d{4}$/.test(val);
+		if(check) {
+			$(".msg").html("유효한 입력정보 입니다.");
+			$(".msg").css("color", "green");
+		}else {
+			$(".form-control").html();
+			$(".msg").html("유효하지 않은 입력정보 입니다.");
+			$(".msg").css("color", "red");
+		}
+	}
 
 	var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
 	mapOption = {

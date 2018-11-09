@@ -142,6 +142,10 @@ public class ParcelController {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		Map onedata = parcelRepository.getByOneParcel(no);
 		List comlist = parcelRepository.getAllByComments(no);
+		
+		String content = ((String)onedata.get("CONTENT")).replace("\n", "<br>");
+			onedata.put("CONTENT", content);
+			
 			one.put("userInfo", userInfo);
 			one.put("one", onedata);
 			one.put("comlist", comlist);
@@ -160,6 +164,10 @@ public class ParcelController {
 	public ModelAndView getDetailModify(@RequestParam int no, ModelMap one, WebRequest wr) {
 		Map onedata = parcelRepository.getByOneParcel(no);
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+		
+		String content = ((String)onedata.get("CONTENT")).replace("\n", "<br>");
+			onedata.put("CONTENT", content);
+		
 			one.put("one", onedata);
 			one.put("no", no);
 			
