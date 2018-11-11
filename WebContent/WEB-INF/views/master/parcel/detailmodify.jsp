@@ -8,7 +8,6 @@
 <hr class="mb-4">
 <h4 class="mb-3" align="center">분양 글 수정</h4>
 
-<%-- <form action="${pageContext.servletContext.contextPath }/modifyok.do" method="post" enctype="multipart/form-data"> --%>
 <form action="${pageContext.servletContext.contextPath }/updatedetail.do" method="post" >
 	<input type="hidden" name="lat" value="${one.LAT }" id="lat"/>
 	<input type="hidden" name="longi" value="${one.LONGI }" id="longi"/>
